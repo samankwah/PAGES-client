@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.messagesSection {
+  min-height: 70vh;
+  max-height: 70vh;
+  margin-top: 10px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.btnfloat {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  margin: 2px;
+}
