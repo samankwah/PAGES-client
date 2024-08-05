@@ -43,7 +43,7 @@ const Message = ({ message }) => {
             className="
                 flex flex-col
                 space-y-2
-                text-xs
+                text-sm
                 max-w-xs
                 mx-2
                 order-1

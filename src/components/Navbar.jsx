@@ -58,7 +58,7 @@ const Navbar = () => {
               to="/"
               className="flex-shrink-0 text-4xl text-white  font-bold"
             >
-              ChapChap
+              PAGÈS
             </Link>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
