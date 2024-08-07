@@ -59,7 +59,7 @@ const Message = ({ message }) => {
                     py-2
                     rounded-lg
                     inline-block
-                    dark:bg-blue-600
+                    dark:bg-orange-400
                     dark:text-white
                     bg-indigo-500
                     text-white

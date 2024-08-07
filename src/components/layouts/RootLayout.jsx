@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar";
-import ChatDialog from "../interfaces/ChatDialog";
+import ChatDialog from "../interfaces";
 
 const RootLayout = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ChatDialog />
       <div className="container mx-auto">
         <Outlet />
