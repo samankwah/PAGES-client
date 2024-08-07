@@ -1,8 +1,41 @@
-# React + Vite
+# Project Title
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pagès
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+With the chatbox interface, users can input messages, which will be displayed in the chat window, simulating a conversation with the chatbot.
+
+### Features
+
+User Input: Allows users to type and send messages.
+
+Message Display: Displays sent messages in the chat interface.
+
+Mobile Friendly Interface: Mobile-Friendly Interface: Ensures the chat interface is optimized for mobile devices
+
+Call Button: Users can initiate a call directly from the chat interface.
+
+FAQ Button: Provides quick access to frequently asked questions to help users find answers easily.
+
+Video Player and Document Attachment Button: Video playing interface and ability to upload documents only.
+
+## Installation
+
+### Prerequisites
+Ensure you have the following installed:
+- Vite
+- Tailwindcss
+- npm (Node Package Manager)
+
+### Steps to Install
+1. Clone the repository:
+  git clone https://github.com/L0bo1992/pages.git
+2. Install the dependencies:
+    npm install
+  
+   ## Usage
+
+### Running the Application
+To start the application, run:
+npm run dev
