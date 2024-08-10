@@ -4,11 +4,11 @@ const Message = ({ message }) => {
   return (
     <>
       {message.isBot ? (
-        <div className="flex items-end justify-start">
+        <div className="flex items-end justify-start py-3">
           <div
             className="
                 flex flex-col
-                space-y-2
+                space-y-4
                 text-md
                 max-w-xs
                 mx-2
@@ -35,14 +35,14 @@ const Message = ({ message }) => {
               {message.text}
             </span>
           </div>
-          <i className="fas fa-desktop w-6 h-6 dark:text-white  rounded-full order-1" />
+          {/* <i className="fas fa-desktop w-6 h-6 dark:text-white  rounded-full order-1" /> */}
         </div>
       ) : (
-        <div className="flex items-end pt-2 justify-end">
+        <div className="flex items-end py-3 justify-end">
           <div
             className="
                 flex flex-col
-                space-y-2
+                space-y-4
                 text-md
                 max-w-xs
                 mx-2
@@ -68,7 +68,7 @@ const Message = ({ message }) => {
               {message.text}
             </span>
           </div>
-          <i className="fas fa-user w-6 h-6 dark:text-white  rounded-full order-1" />
+          {/* <i className="fas fa-user w-6 h-6 dark:text-white  rounded-full order-1" /> */}
         </div>
       )}
     </>

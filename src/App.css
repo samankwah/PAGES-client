@@ -3,35 +3,12 @@
   padding: 0;
 }
 
-.messagesSection {
-  min-height: 70vh;
-  max-height: 70vh;
-  margin-top: 10px;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
-
-.btnfloat {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  margin: 2px;
-}
-.buttons-container {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  margin: 2px;
+.navbar {
+  background: rgba(209, 213, 219, 0.58);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.2px);
+  -webkit-backdrop-filter: blur(9.2px);
+  border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
 /* Styles for the FAQ component */
