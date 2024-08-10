@@ -3,6 +3,13 @@
   padding: 0;
 }
 
+input,
+textarea,
+select {
+  font-size: 16px;
+  /* Any other styles you want to apply */
+}
+
 .navbar {
   background: rgba(209, 213, 219, 0.58);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

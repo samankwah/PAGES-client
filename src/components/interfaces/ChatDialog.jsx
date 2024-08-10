@@ -178,7 +178,7 @@ const ChatDialog = () => {
                   onChange={handleMessageChange}
                   onKeyDown={handleSubmit}
                   placeholder="Entrez votre message ici"
-                  className="block w-full py-3 pl-3 pr-3 text-sm placeholder-gray-500 bg-white  rounded-md  dark:text-white  focus:outline-none focus:text-gray-900   focus:ring-1 focus:ring-indigo-300 sm:text-sm"
+                  className="block w-full py-3 pl-3 pr-3 placeholder-gray-500 bg-white  rounded-md  dark:text-white  focus:outline-none focus:text-gray-900   focus:ring-1 focus:ring-indigo-300"
                 />
               </div>
               <button
