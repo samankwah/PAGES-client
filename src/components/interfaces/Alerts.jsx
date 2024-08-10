@@ -33,12 +33,12 @@ const Alerts = () => {
 
   return (
     <div className="flex flex-col items-center h-full p-4">
-      <h4 className="font-bold text-2xl mb-4">Alerts</h4>
+      <h4 className="font-bold text-2xl mb-4">Alertes</h4>
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md mb-4"
         onClick={() => addAlert("This is a new alert!")}
       >
-        <FaBell className="inline mr-2" /> Add Alert
+        <FaBell className="inline mr-2" /> Ajouter une alerte
       </button>
       <div className="w-full max-w-md">
         {alerts.map((alert) => (

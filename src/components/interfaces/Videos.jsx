@@ -5,25 +5,25 @@ import ReactPlayer from "react-player";
 const videoData = [
   {
     id: 1,
-    title: "Sample Video 1",
+    title: "Exemple de vidéo 1",
     url: "https://www.youtube.com/watch?v=g5yNsYwuNZM&t=14s",
     thumbnail: "https://img.youtube.com/vi/g5yNsYwuNZM/hqdefault.jpg", // Example thumbnail URL
   },
   {
     id: 2,
-    title: "Sample Video 2",
+    title: "Exemple de vidéo 2",
     url: "https://www.youtube.com/watch?v=Kc-zDo2ojpIs",
     thumbnail: "https://img.youtube.com/vi/g5yNsYwuNZM/hqdefault.jpg", // Example thumbnail URL
   },
   {
     id: 3,
-    title: "Sample Video 3",
+    title: "Exemple de vidéo 3",
     url: "https://www.youtube.com/watch?v=g5yNsYwuNZM&t=14s",
     thumbnail: "https://img.youtube.com/vi/g5yNsYwuNZM/hqdefault.jpg", // Example thumbnail URL
   },
   {
     id: 4,
-    title: "Sample Video 4",
+    title: "Exemple de vidéo 4",
     url: "https://www.youtube.com/watch?v=Kc-zDo2ojpI",
     thumbnail: "https://img.youtube.com/vi/g5yNsYwuNZM/hqdefault.jpg", // Example thumbnail URL
   },
@@ -46,7 +46,7 @@ const Videos = () => {
 
   return (
     <div className="flex flex-col items-center h-full p-4 bg-gray-100 rounded-lg shadow-lg">
-      <h4 className="font-bold text-2xl mb-4">Videos</h4>
+      <h4 className="font-bold text-2xl mb-4">Vidéos</h4>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
         {videoData.map((video) => (
           <div

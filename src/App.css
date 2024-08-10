@@ -33,3 +33,104 @@
   right: 30px;
   margin: 2px;
 }
+
+/* Styles for the FAQ component */
+.faq-container {
+  background-color: #f8fafc;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.faq-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.faq-search {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.faq-search:focus {
+  border-color: #ed8936;
+}
+
+.accordion__button {
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.accordion__button:hover {
+  background-color: #edf2f7;
+}
+
+.accordion__button:focus {
+  border: none;
+  outline: none;
+}
+
+.accordion__button:after {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 24 24' width='24px' height='24px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7.41 16.59L12 12.42l4.59 4.17L18 15.17l-6-5.25-6 5.25z'/%3E%3C/svg%3E");
+  transform: rotate(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.accordion__button[aria-expanded="true"]::after {
+  transform: rotate(-180deg);
+}
+
+.accordion__panel {
+  padding: 1rem;
+  border-top: none;
+}
+
+.typing-dots {
+  display: inline-block;
+  position: relative;
+  width: 48px; /* Adjust this based on the number of dots and their size */
+  height: 48px; /* Height should match the dot size */
+}
+
+.typing-dots div {
+  position: absolute;
+  width: 12px; /* Increase the width for larger dots */
+  height: 12px; /* Increase the height for larger dots */
+  background: orange;
+  border: 3px solid orange; /* Adds a border to make the dots bolder */
+  border-radius: 50%;
+  animation: typing-dots 1.2s linear infinite;
+}
+
+.typing-dots div:nth-child(1) {
+  left: 4px; /* Adjust spacing */
+  animation-delay: 0s;
+}
+.typing-dots div:nth-child(2) {
+  left: 18px; /* Adjust spacing between dots */
+  animation-delay: 0.2s;
+}
+.typing-dots div:nth-child(3) {
+  left: 32px; /* Adjust spacing between dots */
+  animation-delay: 0.4s;
+}
+
+@keyframes typing-dots {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

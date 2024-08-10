@@ -9,7 +9,7 @@ const Message = ({ message }) => {
             className="
                 flex flex-col
                 space-y-2
-                text-xs
+                text-md
                 max-w-xs
                 mx-2
                 order-2
@@ -26,7 +26,7 @@ const Message = ({ message }) => {
                     py-2
                    rounded-lg
                     inline-block
-                    dark:bg-yellow-600
+                    dark:bg-blue-600
                     dark:text-white
                     bg-green-500
                     text-white
@@ -43,7 +43,7 @@ const Message = ({ message }) => {
             className="
                 flex flex-col
                 space-y-2
-                text-sm
+                text-md
                 max-w-xs
                 mx-2
                 order-1

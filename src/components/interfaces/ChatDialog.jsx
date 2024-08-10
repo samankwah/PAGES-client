@@ -1,42 +1,102 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Messages from "../Messages";
 import { ImAttachment } from "react-icons/im";
 import { IoMdSend, IoMdClose } from "react-icons/io";
+import {
+  startChatSession,
+  getChatSession,
+  sendMessage,
+} from "../../services/message";
 
-const ChatDialog = ({ interfaceToShow }) => {
+const ChatDialog = () => {
   const [responses, setResponses] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [attachedFile, setAttachedFile] = useState(null);
+  const [sessionId, setSessionId] = useState(null);
+  const [botResponseLoading, setBotResponseLoading] = useState(false);
+
+  const startNewSession = async () => {
+    try {
+      const res = await startChatSession();
+      console.log("New Session=-->", res);
+
+      if (res.status === 201) {
+        // Store the session ID in localStorage
+        window.localStorage.setItem("chatSessionId", res.data.sessionId);
+        setSessionId(res.data.sessionId);
+      } else {
+        console.warn("Unexpected response status:", res.status);
+      }
+    } catch (error) {
+      console.error("Error starting new session:", error);
+    }
+  };
+
+  const fetchChatSession = async (sessionId) => {
+    try {
+      const res = await getChatSession(sessionId);
+      const oldChat = [];
+      console.log("Chat session--->", res);
+      res.data.map((d) => {
+        if (d.sender === "user") {
+          oldChat.push({
+            text: d.content,
+            isBot: false,
+          });
+        } else {
+          oldChat.push({
+            text: d.content,
+            isBot: true,
+          });
+        }
+        setResponses(oldChat);
+      });
+    } catch (error) {
+      console.log("Error fetching chat session", error);
+    }
+  };
+
+  const createOrFetchChatSession = async () => {
+    try {
+      const chatSessionId = window.localStorage.getItem("chatSessionId");
+
+      if (chatSessionId) {
+        // Fetch existing chat session
+        await fetchChatSession(chatSessionId);
+        setSessionId(chatSessionId);
+      } else {
+        // Start a new session if no session ID is found
+        await startNewSession();
+      }
+    } catch (error) {
+      console.error("Error in createOrFetchChatSession:", error);
+    }
+  };
+
+  useEffect(() => {
+    createOrFetchChatSession();
+  }, []);
 
   const handleMessageSubmit = async (message, file) => {
+    setBotResponseLoading(true);
     try {
-      const formData = new FormData();
-      formData.append("message", message);
-      if (file) {
-        formData.append("file", file);
-      }
-
-      const { data } = await axios.post(
-        "http://localhost:3001/chatbot",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const res = await sendMessage(sessionId, {
+        messages: [{ sender: "user", content: message }],
+      });
 
       const responseData = {
         text:
-          data.message.fulfillmentText ||
+          res.data[1].content ||
           "Sorry, I can't get it. Can you please repeat once?",
         isBot: true,
       };
       setResponses((prevResponses) => [...prevResponses, responseData]);
     } catch (error) {
       console.log("Error: ", error);
+    } finally {
+      setBotResponseLoading(false);
     }
   };
 
@@ -59,9 +119,21 @@ const ChatDialog = ({ interfaceToShow }) => {
     }
   };
   return (
-    <div className="flex flex-col justify-between h-full">
+    <div className="flex flex-col justify-between h-[85vh]">
       <div className="flex flex-col p-3 space-y-4 overflow-y-auto scrolling-touch h-full scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2">
-        <Messages messages={responses} />
+        <Messages
+          messages={responses}
+          botResponseLoading={botResponseLoading}
+        />
+        {botResponseLoading ? (
+          <div className="typing-dots py-5">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="flex w-full flex-col gap-2 px-3 py-2 border-t-2 border-gray-200 dark:border-orange-600">
@@ -94,7 +166,7 @@ const ChatDialog = ({ interfaceToShow }) => {
               value={currentMessage}
               onChange={handleMessageChange}
               onKeyDown={handleSubmit}
-              placeholder="Enter your message here"
+              placeholder="Entrez votre message ici"
               className="block w-full py-3 pl-3 pr-3 text-sm placeholder-gray-500 bg-white  rounded-md  dark:text-white  focus:outline-none focus:text-gray-900   focus:ring-1 focus:ring-indigo-300 sm:text-sm"
             />
           </div>
