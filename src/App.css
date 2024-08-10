@@ -1,3 +1,7 @@
+:root {
+  --vh: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +12,10 @@ textarea,
 select {
   font-size: 16px;
   /* Any other styles you want to apply */
+}
+
+.full-height {
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 .navbar {
