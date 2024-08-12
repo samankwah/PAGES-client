@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import Messages from "../Messages";
 import { ImAttachment } from "react-icons/im";
 import { IoMdSend, IoMdClose } from "react-icons/io";
 import {
@@ -9,6 +7,7 @@ import {
   getChatSession,
   sendMessage,
 } from "../../services/message";
+import Messages from "../Messages";
 
 const ChatDialog = () => {
   const [responses, setResponses] = useState([]);
@@ -17,12 +16,12 @@ const ChatDialog = () => {
   const [sessionId, setSessionId] = useState(null);
   const [botResponseLoading, setBotResponseLoading] = useState(false);
 
-  const [inputHeight, setNavbarHeight] = useState(0);
+  const [inputHeight, setInputHeight] = useState(0);
   const inputRef = useRef(null);
 
   useEffect(() => {
     if (inputRef.current) {
-      setNavbarHeight(inputRef.current.offsetHeight);
+      setInputHeight(inputRef.current.offsetHeight);
     }
   }, []);
 
@@ -91,13 +90,29 @@ const ChatDialog = () => {
   const handleMessageSubmit = async (message, file) => {
     setBotResponseLoading(true);
     try {
-      const res = await sendMessage(sessionId, {
-        messages: [{ sender: "user", content: message }],
-      });
+      let response;
 
+      if (file) {
+        // Handle sending file along with the message
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("message", message);
+        formData.append("sessionId", sessionId);
+
+        response = await sendMessage(sessionId, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } else {
+        // Handle sending text message only
+        response = await sendMessage(sessionId, {
+          messages: [{ sender: "user", content: message }],
+        });
+      }
+
+      // Handle bot response
       const responseData = {
         text:
-          res.data[1].content ||
+          response.data[1].content ||
           "Sorry, I can't get it. Can you please repeat once?",
         isBot: true,
       };
@@ -119,7 +134,10 @@ const ChatDialog = () => {
   };
 
   const handleSubmit = (event) => {
-    if (event.key === "Enter" && currentMessage.trim()) {
+    if (
+      (event.key === "Enter" || event.type === "click") &&
+      (currentMessage.trim() || attachedFile)
+    ) {
       const message = { text: currentMessage, isBot: false };
       setResponses((prevResponses) => [...prevResponses, message]);
       handleMessageSubmit(currentMessage, attachedFile);
@@ -127,6 +145,7 @@ const ChatDialog = () => {
       setAttachedFile(null);
     }
   };
+
   return (
     <div className="">
       <div className="flex flex-col p-3 space-y-4 overflow-y-auto scrolling-touch h-full scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2">
@@ -136,7 +155,6 @@ const ChatDialog = () => {
         />
         {botResponseLoading ? (
           <div className="typing-dots py-5">
-            <div></div>
             <div></div>
             <div></div>
           </div>
@@ -161,7 +179,7 @@ const ChatDialog = () => {
             )}
             <div className="flex gap-4 items-center">
               <label
-                className="font-extrabold flex items-center text-orange-300 cursor-pointer"
+                className="font-extrabold flex items-center text-orange-500 cursor-pointer"
                 title="Attach document"
               >
                 <ImAttachment size={25} />
@@ -169,6 +187,7 @@ const ChatDialog = () => {
                   type="file"
                   className="hidden"
                   onChange={handleFileAttachment}
+                  accept="*/*" // This accepts any file type
                 />
               </label>
               <div className="w-full p-[1px] rounded-lg shadow-sm bg-orange-500 lg:max-w-lg">
@@ -189,11 +208,7 @@ const ChatDialog = () => {
                 }`}
                 title="Send message"
                 disabled={!currentMessage.trim() && !attachedFile}
-                onClick={() => {
-                  if (currentMessage.trim() || attachedFile) {
-                    handleSubmit({ key: "Enter" });
-                  }
-                }}
+                onClick={handleSubmit}
               >
                 <IoMdSend size={25} />
               </button>
