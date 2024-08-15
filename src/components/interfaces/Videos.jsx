@@ -77,11 +77,16 @@ const Videos = () => {
               &times;
             </button>
             <h5 className="font-bold text-xl mb-4">{selectedVideo.title}</h5>
-            <div className="relative pb-[56.25%] h-0">
+            <div
+              className="relative w-full overflow-hidden"
+              style={{ paddingBottom: "56.25%", height: 0 }}
+            >
               <ReactPlayer
                 url={selectedVideo.url}
-                className="absolute top-0 left-0 w-full h-full"
+                className="absolute top-0 left-0 w-full h-full overflow-x-hidden"
                 controls
+                width="100%"
+                height="100%"
               />
             </div>
           </div>
