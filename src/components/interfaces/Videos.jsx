@@ -6,7 +6,7 @@ const videoData = [
   {
     id: 1,
     title: "Exemple de vidéo 1",
-    url: "https://www.youtube.com/watch?v=g5yNsYwuNZM&t=14s",
+    url: "https://www.youtube.com/watch?v=QxeP_QyNJA8",
     thumbnail: "https://img.youtube.com/vi/g5yNsYwuNZM/hqdefault.jpg", // Example thumbnail URL
   },
   {
@@ -18,7 +18,7 @@ const videoData = [
   {
     id: 3,
     title: "Exemple de vidéo 3",
-    url: "https://www.youtube.com/watch?v=g5yNsYwuNZM&t=14s",
+    url: "https://www.youtube.com/watch?v=QxeP_QyNJA8",
     thumbnail: "https://img.youtube.com/vi/g5yNsYwuNZM/hqdefault.jpg", // Example thumbnail URL
   },
   {
